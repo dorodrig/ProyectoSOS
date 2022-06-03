@@ -1,0 +1,118 @@
+<div>
+  <h2 id="page-heading" data-cy="CeetUserHeading">
+    <span ceetTranslate="proyectoSosApp.ceetUser.home.title">Ceet Users</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span ceetTranslate="proyectoSosApp.ceetUser.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ceet-user"
+        [routerLink]="['/ceet-user/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span ceetTranslate="proyectoSosApp.ceetUser.home.createLabel"> Create a new Ceet User </span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error></ceet-alert-error>
+
+  <ceet-alert></ceet-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="ceetUsers?.length === 0">
+    <span ceetTranslate="proyectoSosApp.ceetUser.home.notFound">No ceetUsers found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="ceetUsers && ceetUsers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr ceetSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" ceetSortBy="id"><span ceetTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" ceetSortBy="phone">
+            <span ceetTranslate="proyectoSosApp.ceetUser.phone">Phone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" ceetSortBy="address">
+            <span ceetTranslate="proyectoSosApp.ceetUser.address">Address</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" ceetSortBy="documentNumber">
+            <span ceetTranslate="proyectoSosApp.ceetUser.documentNumber">Document Number</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" ceetSortBy="documentType">
+            <span ceetTranslate="proyectoSosApp.ceetUser.documentType">Document Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" ceetSortBy="student.id">
+            <span ceetTranslate="proyectoSosApp.ceetUser.student">Student</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ceetUser of ceetUsers; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/ceet-user', ceetUser.id, 'view']">{{ ceetUser.id }}</a>
+          </td>
+          <td>{{ ceetUser.phone }}</td>
+          <td>{{ ceetUser.address }}</td>
+          <td>{{ ceetUser.documentNumber }}</td>
+          <td>{{ ceetUser.documentType }}</td>
+          <td>
+            <div *ngIf="ceetUser.student">
+              <a [routerLink]="['/student', ceetUser.student?.id, 'view']">{{ ceetUser.student?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/ceet-user', ceetUser.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" ceetTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/ceet-user', ceetUser.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(ceetUser)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="ceetUsers && ceetUsers.length > 0">
+    <div class="d-flex justify-content-center">
+      <ceet-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></ceet-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

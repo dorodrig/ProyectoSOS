@@ -1,0 +1,30 @@
+{
+  "applications": ["proyectoSOS"],
+  "changelogDate": "20220602223033",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "teacher",
+  "fields": [],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Teacher",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "ceetUser",
+      "otherEntityRelationshipName": "teacher",
+      "ownerSide": true,
+      "relationshipName": "ceetUser",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "teacher",
+      "ownerSide": true,
+      "relationshipName": "course",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

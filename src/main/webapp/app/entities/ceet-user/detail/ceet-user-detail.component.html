@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="ceetUser">
+      <h2 data-cy="ceetUserDetailsHeading"><span ceetTranslate="proyectoSosApp.ceetUser.detail.title">Ceet User</span></h2>
+
+      <hr />
+
+      <ceet-alert-error></ceet-alert-error>
+
+      <ceet-alert></ceet-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span ceetTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ ceetUser.id }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.ceetUser.phone">Phone</span></dt>
+        <dd>
+          <span>{{ ceetUser.phone }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.ceetUser.address">Address</span></dt>
+        <dd>
+          <span>{{ ceetUser.address }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.ceetUser.documentNumber">Document Number</span></dt>
+        <dd>
+          <span>{{ ceetUser.documentNumber }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.ceetUser.documentType">Document Type</span></dt>
+        <dd>
+          <span>{{ ceetUser.documentType }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.ceetUser.student">Student</span></dt>
+        <dd>
+          <div *ngIf="ceetUser.student">
+            <a [routerLink]="['/student', ceetUser.student?.id, 'view']">{{ ceetUser.student?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span ceetTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/ceet-user', ceetUser.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span ceetTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

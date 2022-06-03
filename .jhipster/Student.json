@@ -1,0 +1,43 @@
+{
+  "applications": ["proyectoSOS"],
+  "changelogDate": "20220602222233",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "student",
+  "fields": [
+    {
+      "fieldName": "attendantName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "kin",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Student",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "enrollment",
+      "otherEntityRelationshipName": "student",
+      "ownerSide": true,
+      "relationshipName": "enrollment",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "ceetUser",
+      "otherEntityRelationshipName": "student",
+      "ownerSide": false,
+      "relationshipName": "ceetUser",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

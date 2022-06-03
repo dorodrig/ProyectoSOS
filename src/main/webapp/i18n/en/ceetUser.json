@@ -1,0 +1,29 @@
+{
+  "proyectoSosApp": {
+    "ceetUser": {
+      "home": {
+        "title": "Ceet Users",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Ceet User",
+        "createOrEditLabel": "Create or edit a Ceet User",
+        "notFound": "No Ceet Users found"
+      },
+      "created": "A new Ceet User is created with identifier {{ param }}",
+      "updated": "A Ceet User is updated with identifier {{ param }}",
+      "deleted": "A Ceet User is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Ceet User {{ id }}?"
+      },
+      "detail": {
+        "title": "Ceet User"
+      },
+      "id": "ID",
+      "phone": "Phone",
+      "address": "Address",
+      "documentNumber": "Document Number",
+      "documentType": "Document Type",
+      "student": "Student",
+      "teacher": "Teacher"
+    }
+  }
+}
